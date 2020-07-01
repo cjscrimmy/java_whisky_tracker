@@ -22,9 +22,9 @@ public class WhiskyController {
         return new ResponseEntity<>(whiskyRepository.findAll(), HttpStatus.OK);
     }
 
-//    @GetMapping(value = "/whiskies/{id}")
-//    public ResponseEntity getWhisky(@PathVariable Long id) {
-//        return new ResponseEntity<>(whiskyRepository.findById(id), HttpStatus.OK);
-//    }
+    @GetMapping(value = "/whiskies/{id}")
+    public ResponseEntity getWhisky(@PathVariable Long id) {
+        return new ResponseEntity<>(whiskyRepository.findById(id), HttpStatus.OK);
+    }
 
 }
