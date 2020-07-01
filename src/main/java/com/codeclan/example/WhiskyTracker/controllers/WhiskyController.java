@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,7 +19,10 @@ public class WhiskyController {
     WhiskyRepository whiskyRepository;
 
     @GetMapping(value = "/whiskies")
-    public ResponseEntity<List<Whisky>> getAllWhiskies() {
+    public ResponseEntity<List<Whisky>> findWhiskiesFilterByYear(@RequestParam(name="year", required = false) Integer year) {
+        if(year != null){
+            return new ResponseEntity<>(whiskyRepository.findWhiskyByYear(year), HttpStatus.OK);
+        }
         return new ResponseEntity<>(whiskyRepository.findAll(), HttpStatus.OK);
     }
 
@@ -26,5 +30,6 @@ public class WhiskyController {
     public ResponseEntity getWhisky(@PathVariable Long id) {
         return new ResponseEntity<>(whiskyRepository.findById(id), HttpStatus.OK);
     }
+
 
 }
